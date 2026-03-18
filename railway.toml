@@ -1,0 +1,7 @@
+[build]
+builder = "RAILPACK"
+
+[deploy]
+startCommand = "python src/schedule_agent.py"
+restartPolicyType = "ALWAYS"
+restartPolicyMaxRetries = 10

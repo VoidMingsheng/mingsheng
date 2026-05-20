@@ -4,11 +4,10 @@ This runbook is the fastest path from project scaffold to a working local or pri
 
 ## 1. Preview The UI Without Installing Dependencies
 
-From the `hr-interview-intelligence` folder:
+From this folder:
 
-```bash
-cd demo
-python -m http.server 4173
+```powershell
+powershell -ExecutionPolicy Bypass -File .\start-demo.ps1
 ```
 
 Open:
@@ -17,7 +16,7 @@ Open:
 http://localhost:4173
 ```
 
-The demo is interactive. You can add a candidate, paste resume and transcript text, generate a deterministic score, select candidates, view mentor recommendations, reset demo data, and export the selected candidate as JSON.
+The demo is interactive. You can add a candidate, import resume/transcript files, track interview recordings, paste resume and transcript text, generate a deterministic score, select candidates, view multiple co-worker matches for hire recommendations, reset demo data, and export the selected candidate as JSON.
 
 ## 2. Private Server Demo Deployment
 
@@ -52,20 +51,12 @@ Open API docs:
 http://localhost:8000/docs
 ```
 
-Useful endpoint:
-
-```text
-POST /api/v1/candidates/analyze
-```
-
 ## 4. Run Backend Checks
 
 ```bash
 cd backend
 pytest
 ```
-
-The included tests cover scoring thresholds and mentor matching priority.
 
 ## 5. Run The Next.js Frontend
 
@@ -82,23 +73,7 @@ Open:
 http://localhost:3000
 ```
 
-## 6. Start PostgreSQL For Persistence Work
-
-From `hr-interview-intelligence`:
-
-```bash
-docker compose up db
-```
-
-Then generate or migrate Prisma from `database`:
-
-```bash
-npm install
-npx prisma generate
-npx prisma migrate dev
-```
-
-## 7. Next Implementation Priorities
+## 6. Next Implementation Priorities
 
 1. Add real resume and interview audio upload endpoints.
 2. Persist candidates, jobs, interviews, scorecards, and audit events in PostgreSQL.

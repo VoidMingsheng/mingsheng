@@ -1,14 +1,14 @@
-from app.services.mentor_matcher import rank_mentors
+from app.services.coworker_matcher import rank_coworkers
 
 
-def test_rank_mentors_prioritizes_same_department_and_availability() -> None:
+def test_rank_coworkers_prioritizes_same_department_and_availability() -> None:
     employees = [
         {
             "employee_id": "a",
             "name": "A",
             "department": "Sales",
             "mbti": "ENFJ",
-            "mentoring_score": 5,
+            "onboarding_score": 5,
             "availability": 1,
         },
         {
@@ -16,11 +16,11 @@ def test_rank_mentors_prioritizes_same_department_and_availability() -> None:
             "name": "B",
             "department": "Software Engineering",
             "mbti": "INTJ",
-            "mentoring_score": 4.5,
+            "onboarding_score": 4.5,
             "availability": 0.8,
         },
     ]
 
-    ranked = rank_mentors("INTJ", "Software Engineering", employees)
+    ranked = rank_coworkers("INTJ", "Software Engineering", employees)
 
     assert ranked[0]["employee_id"] == "b"

@@ -35,12 +35,13 @@ class CategoryScoreOut(BaseModel):
     evidence: list[str]
 
 
-class MentorRecommendationOut(BaseModel):
+class CoworkerMatchOut(BaseModel):
     employee_id: str
     name: str
     department: str
     mbti: str | None
     compatibility_score: float
+    availability: float
     explanation: str
 
 
@@ -57,5 +58,5 @@ class AnalysisResponse(BaseModel):
     skill_match_percent: float
     experience_match_percent: float
     keyword_gaps: list[str]
-    mentor_recommendations: list[MentorRecommendationOut]
+    coworker_matches: list[CoworkerMatchOut]
     human_review_required: bool = True

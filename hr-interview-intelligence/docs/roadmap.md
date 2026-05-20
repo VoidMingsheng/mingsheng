@@ -22,7 +22,7 @@ Deliverables:
 - Behavioral interview analysis.
 - Confidence and communication analytics.
 - Personality detection as optional onboarding signal.
-- Mentor recommendation.
+- Co-worker recommendation.
 - Score explanations and evidence review.
 
 ## Stage 3: Enterprise

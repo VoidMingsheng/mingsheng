@@ -5,6 +5,6 @@ from app.seed_data import SEED_EMPLOYEES
 router = APIRouter()
 
 
-@router.get("/mentors")
-def list_mentors() -> list[dict]:
+@router.get("/coworkers")
+def list_coworkers() -> list[dict]:
     return SEED_EMPLOYEES

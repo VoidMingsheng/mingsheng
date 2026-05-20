@@ -15,7 +15,7 @@ TECHNICAL_TERMS = {
     "design",
 }
 PROBLEM_SOLVING_TERMS = {"tradeoff", "root cause", "hypothesis", "debug", "prioritize", "risk", "constraint"}
-LEADERSHIP_TERMS = {"led", "owned", "mentored", "coordinated", "initiated", "improved", "delivered"}
+LEADERSHIP_TERMS = {"led", "owned", "coached", "coordinated", "initiated", "improved", "delivered"}
 LEARNING_TERMS = {"learned", "adapted", "curious", "feedback", "improved", "experimented"}
 
 

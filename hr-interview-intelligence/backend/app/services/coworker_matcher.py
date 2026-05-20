@@ -20,18 +20,18 @@ COMPLEMENTARY_PAIRS = {
 }
 
 
-def mbti_score(candidate_mbti: str | None, mentor_mbti: str | None) -> float:
-    if not candidate_mbti or not mentor_mbti:
+def mbti_score(candidate_mbti: str | None, coworker_mbti: str | None) -> float:
+    if not candidate_mbti or not coworker_mbti:
         return 12
 
     candidate = candidate_mbti.upper()
-    mentor = mentor_mbti.upper()
+    coworker = coworker_mbti.upper()
 
-    if candidate == mentor:
+    if candidate == coworker:
         return 20
-    if mentor in COMPLEMENTARY_PAIRS.get(candidate, set()):
+    if coworker in COMPLEMENTARY_PAIRS.get(candidate, set()):
         return 25
-    if candidate[:2] == mentor[:2] or candidate[2:] == mentor[2:]:
+    if candidate[:2] == coworker[:2] or candidate[2:] == coworker[2:]:
         return 16
     return 10
 
@@ -42,11 +42,11 @@ def department_fit_score(candidate_mbti: str | None, department: str) -> float:
     return 9 if candidate_mbti.upper() in DEPARTMENT_MBTI_TENDENCIES.get(department, set()) else 6
 
 
-def rank_mentors(
+def rank_coworkers(
     candidate_mbti: str | None,
     target_department: str,
     employees: list[dict],
-    limit: int = 3,
+    limit: int = 4,
 ) -> list[dict]:
     ranked = []
 
@@ -54,9 +54,9 @@ def rank_mentors(
         same_department = employee.get("department") == target_department
         department_score = 35 if same_department else 12
         personality_score = mbti_score(candidate_mbti, employee.get("mbti"))
-        mentoring_score = min(float(employee.get("mentoring_score", 0)) / 5, 1) * 20
+        onboarding_score = min(float(employee.get("onboarding_score", 0)) / 5, 1) * 20
         availability_score = min(float(employee.get("availability", 0)), 1) * 20
-        total = round(department_score + personality_score + mentoring_score + availability_score, 2)
+        total = round(department_score + personality_score + onboarding_score + availability_score, 2)
 
         ranked.append(
             {
@@ -65,8 +65,9 @@ def rank_mentors(
                 "department": employee["department"],
                 "mbti": employee.get("mbti"),
                 "compatibility_score": total,
+                "availability": employee.get("availability", 0),
                 "explanation": (
-                    "Prioritized for onboarding fit using department match, mentor quality, "
+                    "Prioritized for onboarding fit using department match, onboarding score, "
                     "availability, and MBTI compatibility as a support signal only."
                 ),
             }

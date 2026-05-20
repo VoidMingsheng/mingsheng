@@ -29,7 +29,7 @@ SEED_EMPLOYEES = [
         "department": "Software Engineering",
         "mbti": "INTJ",
         "seniority_level": "Principal",
-        "mentoring_score": 4.8,
+        "onboarding_score": 4.8,
         "availability": 0.72,
     },
     {
@@ -38,7 +38,7 @@ SEED_EMPLOYEES = [
         "department": "Software Engineering",
         "mbti": "ENTP",
         "seniority_level": "Senior",
-        "mentoring_score": 4.4,
+        "onboarding_score": 4.4,
         "availability": 0.58,
     },
     {
@@ -47,7 +47,7 @@ SEED_EMPLOYEES = [
         "department": "Project Management",
         "mbti": "ENTJ",
         "seniority_level": "Lead",
-        "mentoring_score": 4.7,
+        "onboarding_score": 4.7,
         "availability": 0.81,
     },
     {
@@ -56,7 +56,7 @@ SEED_EMPLOYEES = [
         "department": "Sales",
         "mbti": "ENFJ",
         "seniority_level": "Director",
-        "mentoring_score": 4.6,
+        "onboarding_score": 4.6,
         "availability": 0.63,
     },
 ]

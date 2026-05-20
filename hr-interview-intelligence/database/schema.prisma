@@ -62,10 +62,10 @@ model Employee {
   department      String
   mbti            String?
   seniorityLevel  String
-  mentoringScore  Float             @default(0)
+  onboardingScore Float             @default(0)
   availability    Float             @default(0)
   active          Boolean           @default(true)
-  mentorMatches   MatchResult[]     @relation("MentorMatches")
+  coworkerMatches MatchResult[]     @relation("CoworkerMatches")
 }
 
 model Interview {
@@ -99,7 +99,7 @@ model Scorecard {
 model MatchResult {
   id                  String        @id @default(uuid())
   candidateId          String
-  mentorId             String?
+  coworkerId           String?
   department           String
   skillMatchPercent    Float
   experienceMatchPercent Float
@@ -107,7 +107,7 @@ model MatchResult {
   explanation          String
   createdAt            DateTime      @default(now())
   candidate            Candidate     @relation(fields: [candidateId], references: [id])
-  mentor               Employee?     @relation("MentorMatches", fields: [mentorId], references: [id])
+  coworker             Employee?     @relation("CoworkerMatches", fields: [coworkerId], references: [id])
 }
 
 model AuditEvent {

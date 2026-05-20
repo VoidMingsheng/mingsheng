@@ -1,7 +1,7 @@
 from app.seed_data import SEED_EMPLOYEES
 from app.services.interview_analyzer import analyze_interview
 from app.services.job_matcher import compare_candidate_to_job
-from app.services.mentor_matcher import department_fit_score, rank_mentors
+from app.services.coworker_matcher import department_fit_score, rank_coworkers
 from app.services.resume_parser import parse_resume_text
 from app.services.scoring import score_candidate
 
@@ -48,7 +48,11 @@ def analyze_candidate(candidate: dict, job: dict, interview: dict, employees: li
         weaknesses.append(f"Missing or weak evidence for: {', '.join(job_match['keyword_gaps'])}.")
 
     scorecard = score_candidate(category_inputs, evidence, strengths, weaknesses)
-    mentors = rank_mentors(candidate.get("mbti"), job["department"], employees or SEED_EMPLOYEES)
+    coworker_matches = (
+        rank_coworkers(candidate.get("mbti"), job["department"], employees or SEED_EMPLOYEES)
+        if scorecard["recommendation"] in {"Strong Hire", "Hire"}
+        else []
+    )
 
     return {
         "candidate_name": candidate["name"],
@@ -57,5 +61,5 @@ def analyze_candidate(candidate: dict, job: dict, interview: dict, employees: li
         "skill_match_percent": job_match["skill_match_percent"],
         "experience_match_percent": job_match["experience_match_percent"],
         "keyword_gaps": job_match["keyword_gaps"],
-        "mentor_recommendations": mentors,
+        "coworker_matches": coworker_matches,
     }

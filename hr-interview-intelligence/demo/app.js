@@ -383,7 +383,7 @@ async function fillTextFromFile(inputId, textareaName, statusId) {
   if (!file) return;
   const status = document.querySelector(statusId);
   status.textContent = `Selected: ${file.name}`;
-  if (/?\.(txt|vtt|srt)$/i.test(file.name)) {
+  if (/\.(txt|vtt|srt)$/i.test(file.name)) {
     const text = await file.text();
     document.querySelector(`[name="${textareaName}"]`).value = text;
     status.textContent = `Imported text from ${file.name}`;

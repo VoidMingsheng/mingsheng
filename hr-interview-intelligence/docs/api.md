@@ -48,7 +48,7 @@ Response:
   "strengths": [],
   "weaknesses": [],
   "skill_match_percent": 75,
-  "mentor_recommendations": []
+  "coworker_matches": []
 }
 ```
 
@@ -60,9 +60,9 @@ Returns seed job descriptions for the MVP dashboard.
 
 ## Employees
 
-`GET /api/v1/employees/mentors`
+`GET /api/v1/employees/coworkers`
 
-Returns seed mentor records with department, MBTI, availability, and mentoring scores.
+Returns seed co-worker records with department, MBTI, availability, and onboarding scores.
 
 ## Notes
 

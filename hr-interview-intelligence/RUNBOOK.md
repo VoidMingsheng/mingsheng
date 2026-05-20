@@ -1,10 +1,8 @@
 # HR Interview Intelligence Runbook
 
-This runbook is the fastest path from project scaffold to a working local review.
+This runbook is the fastest path from project scaffold to a working local or private-server review.
 
 ## 1. Preview The UI Without Installing Dependencies
-
-The branch includes a static dashboard preview.
 
 From the `hr-interview-intelligence` folder:
 
@@ -19,11 +17,27 @@ Open:
 http://localhost:4173
 ```
 
-This preview mirrors the dashboard layout and lets stakeholders review the product direction immediately.
+The demo is interactive. You can add a candidate, paste resume and transcript text, generate a deterministic score, select candidates, view mentor recommendations, reset demo data, and export the selected candidate as JSON.
 
-## 2. Run The Backend API
+## 2. Private Server Demo Deployment
 
-From `hr-interview-intelligence/backend`:
+The static demo can run on a private server with Docker:
+
+```bash
+docker compose -f deploy/private-server/docker-compose.demo.yml up -d --build
+```
+
+Open:
+
+```text
+http://YOUR_SERVER_IP:8080
+```
+
+See `deploy/private-server/README.md` for firewall, domain, HTTPS, update, and stop instructions.
+
+## 3. Run The Backend API
+
+From `backend`:
 
 ```bash
 python -m venv .venv
@@ -44,7 +58,7 @@ Useful endpoint:
 POST /api/v1/candidates/analyze
 ```
 
-## 3. Run Backend Checks
+## 4. Run Backend Checks
 
 ```bash
 cd backend
@@ -53,9 +67,9 @@ pytest
 
 The included tests cover scoring thresholds and mentor matching priority.
 
-## 4. Run The Next.js Frontend
+## 5. Run The Next.js Frontend
 
-From `hr-interview-intelligence/frontend`:
+From `frontend`:
 
 ```bash
 npm install
@@ -68,7 +82,7 @@ Open:
 http://localhost:3000
 ```
 
-## 5. Start PostgreSQL For Persistence Work
+## 6. Start PostgreSQL For Persistence Work
 
 From `hr-interview-intelligence`:
 
@@ -76,7 +90,7 @@ From `hr-interview-intelligence`:
 docker compose up db
 ```
 
-Then generate or migrate Prisma from `hr-interview-intelligence/database`:
+Then generate or migrate Prisma from `database`:
 
 ```bash
 npm install
@@ -84,7 +98,7 @@ npx prisma generate
 npx prisma migrate dev
 ```
 
-## 6. Next Implementation Priorities
+## 7. Next Implementation Priorities
 
 1. Add real resume and interview audio upload endpoints.
 2. Persist candidates, jobs, interviews, scorecards, and audit events in PostgreSQL.

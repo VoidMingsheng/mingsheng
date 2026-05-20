@@ -11,7 +11,7 @@ Input layer:
 - Resume files: PDF, DOCX, image scans through OCR.
 - Interview media: audio or video.
 - Job data: selected role, job description, required skills.
-- Company data: departments, employee profiles, mentor capacity, onboarding scores.
+- Company data: departments, employee profiles, co-worker availability, onboarding scores, and personality data.
 
 AI pipeline:
 
@@ -20,7 +20,7 @@ AI pipeline:
 3. Interview analyzer creates structured behavioral and communication evidence.
 4. Job matcher compares resume and transcript evidence against the role.
 5. Scoring engine applies the 100-point hiring rubric.
-6. Mentor matcher recommends onboarding support using department, seniority, availability, and MBTI compatibility.
+6. Co-worker matcher recommends onboarding support using department, seniority, availability, and MBTI compatibility.
 7. Dashboard presents evidence, scores, gaps, and human approval actions.
 
 ## Backend Modules
@@ -31,7 +31,7 @@ AI pipeline:
 - `services/interview_analyzer.py`: transcript semantic analysis.
 - `services/job_matcher.py`: skill and experience alignment.
 - `services/scoring.py`: rubric, thresholds, and recommendation logic.
-- `services/mentor_matcher.py`: onboarding compatibility logic.
+- `services/coworker_matcher.py`: onboarding compatibility logic.
 - `services/pipeline.py`: orchestration.
 
 ## Production Integrations

@@ -25,7 +25,8 @@ frontend/    Next.js + TypeScript HR dashboard prototype
 database/    Prisma schema for PostgreSQL
 docs/        Architecture, API, compliance, deployment, roadmap
 infra/       Deployment support files
-demo/        Dependency-free dashboard preview
+demo/        Interactive dependency-free dashboard demo
+deploy/      Private server deployment files
 ```
 
 ## MVP Features Included
@@ -36,6 +37,7 @@ demo/        Dependency-free dashboard preview
 - Critical minimum checks for technical competency and communication
 - MBTI mentor matching with explicit non-discrimination guardrails
 - Next.js dashboard with candidate ranking, scoring visualization, and mentor recommendations
+- Interactive static demo for stakeholder review without dependency installation
 - PostgreSQL Prisma schema
 - Docker Compose for local development
 - API and deployment documentation
@@ -60,7 +62,7 @@ npm install
 npm run dev
 ```
 
-Static demo:
+Interactive static demo:
 
 ```bash
 cd demo
@@ -68,6 +70,14 @@ python -m http.server 4173
 ```
 
 Open `http://localhost:4173`.
+
+Private server demo deployment:
+
+```bash
+docker compose -f deploy/private-server/docker-compose.demo.yml up -d --build
+```
+
+Open `http://YOUR_SERVER_IP:8080`.
 
 ## Important Compliance Boundary
 

@@ -1,0 +1,8 @@
+services:
+  hr-demo:
+    build:
+      context: ../../demo
+    container_name: hr-interview-demo
+    restart: unless-stopped
+    ports:
+      - "8080:8080"

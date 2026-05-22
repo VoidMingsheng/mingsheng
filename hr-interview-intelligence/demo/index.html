@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HR Interview Intelligence Demo</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="brand-mark">HI</span>
+          <span>
+            <strong>HR Intel</strong>
+            <small>Decision Support</small>
+          </span>
+        </div>
+        <nav class="nav-list" aria-label="Demo sections">
+          <button class="nav-item active" data-section="dashboard">Dashboard</button>
+          <button class="nav-item" data-section="intake">New Review</button>
+          <button class="nav-item" data-section="coworkers">Co-workers</button>
+          <button class="nav-item" data-section="compliance">Compliance</button>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <section class="page-stack section active" id="dashboard">
+          <header class="topbar">
+            <div>
+              <p class="eyebrow">Recruitment Review</p>
+              <h1>Candidate intelligence dashboard</h1>
+            </div>
+            <div class="actions">
+              <button class="icon-button" id="resetDemo" title="Reset demo data">R</button>
+              <button class="button" data-section="intake">New review</button>
+            </div>
+          </header>
+
+          <section class="metric-grid" aria-label="Pipeline metrics">
+            <div class="metric">
+              <span>Avg score</span>
+              <strong id="avgScore">0</strong>
+              <small>Current slate</small>
+            </div>
+            <div class="metric">
+              <span>Technical avg</span>
+              <strong id="technicalAvg">0</strong>
+              <small>Out of 25</small>
+            </div>
+            <div class="metric">
+              <span>Communication avg</span>
+              <strong id="communicationAvg">0</strong>
+              <small>Out of 15</small>
+            </div>
+            <div class="metric">
+              <span>Critical pass</span>
+              <strong id="criticalPass">0%</strong>
+              <small>Minimum checks</small>
+            </div>
+          </section>
+
+          <div class="dashboard-grid">
+            <section class="panel candidate-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Ranking Board</p>
+                  <h2>Active candidates</h2>
+                </div>
+                <span class="pill neutral" id="openCount">0 open</span>
+              </div>
+              <div class="candidate-list" id="candidateList"></div>
+            </section>
+
+            <section class="panel result-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Current Result</p>
+                  <h2 id="candidateName">Select a candidate</h2>
+                </div>
+                <button class="icon-button" id="exportCandidate" title="Export selected candidate">E</button>
+              </div>
+              <div class="result-summary">
+                <div class="score-wrap">
+                  <div class="score-ring" id="scoreRing"><strong id="totalScore">0</strong></div>
+                  <p class="muted center" id="recommendation">No result</p>
+                </div>
+                <div class="summary-list">
+                  <span id="department">Department</span>
+                  <strong id="role">Role</strong>
+                  <small id="updatedAt">Not analyzed</small>
+                  <span class="pill neutral" id="criticalStatus">Human review required</span>
+                </div>
+              </div>
+              <div class="rubric-table" id="rubricTable"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Evidence</p>
+                  <h2>Strengths and gaps</h2>
+                </div>
+              </div>
+              <div class="evidence-columns">
+                <div>
+                  <h3>Strengths</h3>
+                  <ul id="strengthsList"></ul>
+                </div>
+                <div>
+                  <h3>Weaknesses</h3>
+                  <ul id="weaknessesList"></ul>
+                </div>
+              </div>
+              <div class="gap-strip" id="gapStrip"></div>
+            </section>
+
+            <section class="panel" id="coworker-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Co-worker Matches</p>
+                  <h2 id="coworkerPanelTitle">No match shown</h2>
+                </div>
+                <span class="icon-button">M</span>
+              </div>
+              <div class="coworker-match-list" id="coworkerMatches"></div>
+              <p class="muted" id="coworkerNote">Co-worker matching appears only for recommended hires.</p>
+            </section>
+          </div>
+
+          <section class="compliance-band">
+            <strong>Human review required</strong>
+            <span>Scores support recruiter judgment and must not be used as fully autonomous hiring decisions.</span>
+          </section>
+        </section>
+
+        <section class="page-stack section" id="intake">
+          <header class="topbar">
+            <div>
+              <p class="eyebrow">New Review</p>
+              <h1>Candidate intake</h1>
+            </div>
+            <button class="button secondary" data-section="dashboard">Back to dashboard</button>
+          </header>
+
+          <section class="panel">
+            <form class="upload-form" id="analysisForm">
+              <div class="field-grid">
+                <label>
+                  Candidate name
+                  <input name="name" placeholder="Aisha Tan" required />
+                </label>
+                <label>
+                  Email
+                  <input name="email" type="email" placeholder="candidate@example.com" />
+                </label>
+                <label>
+                  Job position
+                  <select name="job" id="jobSelect"></select>
+                </label>
+                <label>
+                  MBTI
+                  <select name="mbti">
+                    <option>Unknown</option>
+                    <option>INTJ</option>
+                    <option>INTP</option>
+                    <option>ENTJ</option>
+                    <option>ENFJ</option>
+                    <option>ESFJ</option>
+                    <option>ESTJ</option>
+                    <option>ENTP</option>
+                    <option>ESFP</option>
+                    <option>INFJ</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="field-grid">
+                <label>
+                  Import resume document
+                  <input name="resumeFile" id="resumeFile" type="file" accept=".txt,.pdf,.doc,.docx" />
+                  <small class="muted" id="resumeFileStatus">TXT files auto-fill. PDF/DOCX upload is recorded for the demo.</small>
+                </label>
+                <label>
+                  Import interview recording
+                  <input name="recordingFile" id="recordingFile" type="file" accept="audio/*,video/*" />
+                  <small class="muted" id="recordingFileStatus">Recording import is tracked; transcription is a backend feature.</small>
+                </label>
+              </div>
+
+              <label>
+                Resume text
+                <textarea name="resume" rows="8" placeholder="Paste resume text. Example: Python engineer with 5 years experience in FastAPI, PostgreSQL, testing, and system design." required></textarea>
+              </label>
+
+              <label>
+                Import interview transcript document
+                <input name="transcriptFile" id="transcriptFile" type="file" accept=".txt,.vtt,.srt,.doc,.docx,.pdf" />
+                <small class="muted" id="transcriptFileStatus">TXT/VTT/SRT files auto-fill. Other documents are recorded for the demo.</small>
+              </label>
+
+              <label>
+                Interview transcript
+                <textarea name="transcript" rows="10" placeholder="Paste interview transcript. Mention projects, problem solving, leadership, learning, and communication examples." required></textarea>
+              </label>
+
+              <div class="form-actions">
+                <span class="muted" id="formStatus">Analysis runs locally in this browser demo.</span>
+                <button class="button" type="submit">Run analysis</button>
+              </div>
+            </form>
+          </section>
+        </section>
+
+        <section class="page-stack section" id="compliance">
+          <header class="topbar">
+            <div>
+              <p class="eyebrow">Compliance</p>
+              <h1>Decision support boundary</h1>
+            </div>
+            <button class="button secondary" data-section="dashboard">Back to dashboard</button>
+          </header>
+          <section class="panel prose">
+            <h2>Rules this demo follows</h2>
+            <p>The demo produces an HR review aid. It is not a hiring authority.</p>
+            <ul>
+              <li>Human review is always required before a final decision.</li>
+              <li>MBTI affects onboarding co-worker fit only, not rejection.</li>
+              <li>Protected attributes must not be used in scoring.</li>
+              <li>Emotion and confidence signals are soft evidence only.</li>
+              <li>Production use needs audit logs, data retention controls, and bias monitoring.</li>
+            </ul>
+          </section>
+        </section>
+
+        <section class="page-stack section" id="coworkers">
+          <header class="topbar">
+            <div>
+              <p class="eyebrow">Company Database</p>
+              <h1>Co-worker personality directory</h1>
+            </div>
+            <button class="button secondary" data-section="dashboard">Back to dashboard</button>
+          </header>
+          <section class="panel">
+            <div class="coworker-directory" id="coworkerDirectory"></div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

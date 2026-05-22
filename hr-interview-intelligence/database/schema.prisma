@@ -1,0 +1,121 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum CandidateStatus {
+  NEW
+  ANALYZING
+  REVIEW_READY
+  HUMAN_REVIEW
+  HIRED
+  REJECTED
+  ARCHIVED
+}
+
+enum Recommendation {
+  STRONG_HIRE
+  HIRE
+  CONSIDER
+  WEAK_FIT
+  REJECT
+}
+
+model Candidate {
+  id              String            @id @default(uuid())
+  name            String
+  email           String?           @unique
+  phone           String?
+  resumePath      String?
+  mbti            String?
+  status          CandidateStatus   @default(NEW)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  interviews      Interview[]
+  matchResults    MatchResult[]
+  scorecards      Scorecard[]
+  auditEvents     AuditEvent[]
+}
+
+model Job {
+  id              String            @id @default(uuid())
+  title           String
+  department      String
+  description     String
+  requirements    String
+  skills          String[]
+  minTechnical    Int               @default(15)
+  minCommunication Int              @default(8)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  scorecards      Scorecard[]
+}
+
+model Employee {
+  id              String            @id @default(uuid())
+  name            String
+  email           String?           @unique
+  department      String
+  mbti            String?
+  seniorityLevel  String
+  onboardingScore Float             @default(0)
+  availability    Float             @default(0)
+  active          Boolean           @default(true)
+  coworkerMatches MatchResult[]     @relation("CoworkerMatches")
+}
+
+model Interview {
+  id              String            @id @default(uuid())
+  candidateId     String
+  audioPath       String?
+  transcript      String?
+  aiSummary       String?
+  speakingPace    Float?
+  pauseRate       Float?
+  confidenceScore Float?
+  createdAt       DateTime          @default(now())
+  candidate       Candidate         @relation(fields: [candidateId], references: [id])
+}
+
+model Scorecard {
+  id              String            @id @default(uuid())
+  candidateId     String
+  jobId           String
+  recommendation  Recommendation
+  totalScore      Float
+  criticalPassed  Boolean           @default(false)
+  strengths       String[]
+  weaknesses      String[]
+  evidence        Json
+  createdAt       DateTime          @default(now())
+  candidate       Candidate         @relation(fields: [candidateId], references: [id])
+  job             Job               @relation(fields: [jobId], references: [id])
+}
+
+model MatchResult {
+  id                  String        @id @default(uuid())
+  candidateId          String
+  coworkerId           String?
+  department           String
+  skillMatchPercent    Float
+  experienceMatchPercent Float
+  compatibilityScore   Float
+  explanation          String
+  createdAt            DateTime      @default(now())
+  candidate            Candidate     @relation(fields: [candidateId], references: [id])
+  coworker             Employee?     @relation("CoworkerMatches", fields: [coworkerId], references: [id])
+}
+
+model AuditEvent {
+  id              String            @id @default(uuid())
+  candidateId     String?
+  actorId         String?
+  action          String
+  metadata        Json?
+  createdAt       DateTime          @default(now())
+  candidate       Candidate?        @relation(fields: [candidateId], references: [id])
+}

@@ -46,13 +46,18 @@ export function CandidateUploadForm() {
       <div className="upload-dropzone-grid">
         <label className="dropzone">
           <FileText size={24} />
-          <span>Resume</span>
+          <span>Resume document</span>
           <input name="resume" type="file" accept=".pdf,.doc,.docx,.txt" />
         </label>
         <label className="dropzone">
           <FileAudio size={24} />
-          <span>Interview audio</span>
+          <span>Interview recording</span>
           <input name="audio" type="file" accept="audio/*,video/*" />
+        </label>
+        <label className="dropzone">
+          <FileText size={24} />
+          <span>Transcript document</span>
+          <input name="transcriptFile" type="file" accept=".txt,.vtt,.srt,.pdf,.doc,.docx" />
         </label>
       </div>
 
@@ -61,7 +66,7 @@ export function CandidateUploadForm() {
         <textarea
           name="transcript"
           rows={8}
-          placeholder="Paste transcript text for MVP analysis while audio transcription is being integrated."
+          placeholder="Paste transcript text, or import a transcript document above while recording transcription is being integrated."
           required
         />
       </label>

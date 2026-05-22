@@ -5,7 +5,7 @@ export type CategoryScore = {
   maxScore: number;
 };
 
-export type MentorRecommendation = {
+export type CoworkerMatch = {
   name: string;
   department: string;
   mbti: string;
@@ -27,5 +27,5 @@ export type Candidate = {
   strengths: string[];
   weaknesses: string[];
   gaps: string[];
-  mentor: MentorRecommendation;
+  coworkers: CoworkerMatch[];
 };

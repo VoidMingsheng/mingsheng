@@ -25,13 +25,11 @@ export const candidates: Candidate[] = [
     strengths: ["Strong backend API examples", "Clear problem-solving structure", "Good job skill alignment"],
     weaknesses: ["Needs deeper cloud deployment evidence"],
     gaps: ["kubernetes", "observability"],
-    mentor: {
-      name: "Grace Lee",
-      department: "Software Engineering",
-      mbti: "INTJ",
-      compatibilityScore: 91,
-      availability: 72
-    }
+    coworkers: [
+      { name: "Grace Lee", department: "Software Engineering", mbti: "INTJ", compatibilityScore: 91, availability: 72 },
+      { name: "Daniel Chua", department: "Software Engineering", mbti: "ENTP", compatibilityScore: 84, availability: 58 },
+      { name: "Mei Wong", department: "Project Management", mbti: "ENTJ", compatibilityScore: 67, availability: 81 }
+    ]
   },
   {
     id: "cand-002",
@@ -57,13 +55,7 @@ export const candidates: Candidate[] = [
     strengths: ["Strong stakeholder communication", "Relevant delivery background"],
     weaknesses: ["Limited evidence for risk control depth"],
     gaps: ["budget ownership", "executive reporting"],
-    mentor: {
-      name: "Mei Wong",
-      department: "Project Management",
-      mbti: "ENTJ",
-      compatibilityScore: 88,
-      availability: 81
-    }
+    coworkers: []
   },
   {
     id: "cand-003",
@@ -89,13 +81,7 @@ export const candidates: Candidate[] = [
     strengths: ["Good learning attitude", "Positive customer orientation"],
     weaknesses: ["Technical minimum not met", "Needs stronger sales methodology evidence"],
     gaps: ["crm", "negotiation", "pipeline forecasting"],
-    mentor: {
-      name: "Irfan Rahman",
-      department: "Sales",
-      mbti: "ENFJ",
-      compatibilityScore: 84,
-      availability: 63
-    }
+    coworkers: []
   }
 ];
 

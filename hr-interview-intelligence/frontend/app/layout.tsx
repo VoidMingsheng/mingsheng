@@ -22,10 +22,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </span>
             </Link>
             <nav className="nav-list">
-              <Link href="/" className="nav-item"><BarChart3 size={18} />Dashboard</Link>
-              <Link href="/candidates/new" className="nav-item"><UploadCloud size={18} />New Review</Link>
-              <a href="#mentors" className="nav-item"><UsersRound size={18} />Mentors</a>
-              <a href="#compliance" className="nav-item"><ShieldCheck size={18} />Compliance</a>
+              <Link href="/" className="nav-item">
+                <BarChart3 size={18} />
+                Dashboard
+              </Link>
+              <Link href="/candidates/new" className="nav-item">
+                <UploadCloud size={18} />
+                New Review
+              </Link>
+              <a href="#coworkers" className="nav-item">
+                <UsersRound size={18} />
+                Co-workers
+              </a>
+              <a href="#compliance" className="nav-item">
+                <ShieldCheck size={18} />
+                Compliance
+              </a>
             </nav>
           </aside>
           <main className="content">{children}</main>
